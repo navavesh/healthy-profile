@@ -10,6 +10,8 @@ X,
 import { useState } from "react";
 import "./App.css";
 
+import { Link } from "react-router-dom";
+
 const features = [
 {
 icon: ChefHat,
@@ -33,9 +35,10 @@ const [menuOpen, setMenuOpen] = useState(false);
 
 const closeMenu = () => setMenuOpen(false);
 
-return ( <main className="landing"> 
+return (
+<main className="landing"> 
 
-      <header className="header"> 
+  <header className="header"> 
 
     <a className="brand" href="#home" aria-label="Здоровый Профиль">
       <img
@@ -71,13 +74,15 @@ return ( <main className="landing">
     </nav>
 
     <div className="header-actions">
-      <a className="button button-outline" href="#login">
+      <Link className="button button-outline" to="/login">
         Войти
-      </a>
-      <a className="button button-primary button-register" href="#register">
+      </Link>
+
+      <Link className="button button-primary button-register" to="/register">
         Зарегистрироваться
-      </a>
+      </Link>
     </div>
+    
   </header>
 
   <section className="hero" id="home">
@@ -99,10 +104,10 @@ return ( <main className="landing">
           и цели, рассчитывает КБЖУ и ведет дневник питания.
         </p>
 
-        <a className="button button-primary hero-button" href="#register">
+        <Link className="button button-primary hero-button" to="/register">
           Начать бесплатно
           <ArrowRight size={17} />
-        </a>
+        </Link>
       </div>
 
       <div className="features" id="features">

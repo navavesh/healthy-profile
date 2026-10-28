@@ -1,0 +1,173 @@
+.dashboard-overview {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 20px;
+
+margin-top: 26px;
+}
+
+.overview-card {
+display: flex;
+flex-direction: column;
+align-items: center;
+
+min-width: 0;
+min-height: 310px;
+padding: 15px 24px 17px;
+
+border: 1px solid #d1e1b9;
+border-radius: 21px;
+background: rgba(255, 255, 255, 0.97);
+
+box-shadow: 0 3px 2px rgba(39, 57, 31, 0.14);
+}
+
+.overview-card-header {
+display: flex;
+align-items: center;
+gap: 10px;
+
+width: 100%;
+}
+
+.overview-icon {
+display: grid;
+flex-shrink: 0;
+
+width: 51px;
+height: 51px;
+
+place-items: center;
+
+border-radius: 50%;
+background: #eff6e5;
+color: #111;
+}
+
+.overview-card-header h2 {
+margin: 0;
+color: #111;
+font-size: clamp(16px, 1.4vw, 21px);
+font-weight: 650;
+line-height: 1.25;
+}
+
+.overview-card-header p {
+margin: 3px 0 0;
+color: #292929;
+font-size: 11px;
+line-height: 1.4;
+}
+
+.overview-empty-illustration {
+display: grid;
+flex: 1;
+
+min-height: 115px;
+place-items: center;
+
+color: #a4c47e;
+}
+
+.overview-basket {
+color: #88ae5d;
+}
+
+.overview-empty-content {
+text-align: center;
+}
+
+.overview-empty-content h3 {
+margin: 0;
+color: #111;
+font-size: clamp(14px, 1.2vw, 17px);
+font-weight: 650;
+line-height: 1.4;
+}
+
+.overview-empty-content p {
+margin: 3px 0 0;
+color: #333;
+font-size: 11px;
+line-height: 1.5;
+}
+
+.overview-action {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 7px;
+
+min-height: 43px;
+margin-top: 15px;
+padding: 9px 21px;
+
+border: 1px solid #a7c66e;
+border-radius: 11px;
+background: #285e49;
+color: #fff;
+
+font-size: 16px;
+font-weight: 600;
+text-decoration: none;
+
+transition: background 160ms ease;
+}
+
+.overview-action:hover {
+background: #1e4c3a;
+}
+
+.overview-recipes-link {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+
+grid-column: 1 / -1;
+
+padding: 14px 17px;
+
+border: 1px solid #d1e1b9;
+border-radius: 13px;
+background: #fff;
+
+color: #285e49;
+font-size: 14px;
+font-weight: 600;
+text-decoration: none;
+}
+
+.overview-recipes-link:hover {
+background: #f3f7e9;
+}
+
+@media (max-width: 1000px) {
+.dashboard-overview {
+gap: 15px;
+}
+
+.overview-card {
+padding: 15px;
+}
+
+.overview-card-header {
+align-items: flex-start;
+}
+}
+
+@media (max-width: 650px) {
+.dashboard-overview {
+grid-template-columns: 1fr;
+gap: 16px;
+margin-top: 20px;
+}
+
+.overview-card {
+min-height: 280px;
+}
+
+.overview-recipes-link {
+grid-column: auto;
+}
+}
