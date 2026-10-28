@@ -1,122 +1,159 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import {
+ArrowRight,
+ChefHat,
+HeartHandshake,
+Salad,
+Flame,
+Menu,
+X,
+} from "lucide-react";
+import { useState } from "react";
+import "./App.css";
+
+const features = [
+{
+icon: ChefHat,
+title: "Персональные",
+secondLine: "рекомендации",
+},
+{
+icon: HeartHandshake,
+title: "Учет ограничений",
+secondLine: "и аллергий",
+},
+{
+icon: Salad,
+title: "Расчет КБЖУ",
+secondLine: "",
+},
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+const [menuOpen, setMenuOpen] = useState(false);
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+const closeMenu = () => setMenuOpen(false);
+
+return ( <main className="landing"> 
+
+      <header className="header"> 
+
+    <a className="brand" href="#home" aria-label="Здоровый Профиль">
+      <img
+        className="brand-logo"
+        src="/logo.png"
+        alt="Здоровый Профиль"
+      />
+    </a>
+
+    <button
+      className="mobile-menu-button"
+      type="button"
+      aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+      aria-expanded={menuOpen}
+      onClick={() => setMenuOpen(!menuOpen)}
+    >
+      {menuOpen ? <X size={24} /> : <Menu size={24} />}
+    </button>
+
+    <nav className={`navigation ${menuOpen ? "navigation-open" : ""}`}>
+      <a href="#features" onClick={closeMenu}>
+        Возможности
+      </a>
+      <a href="#about" onClick={closeMenu}>
+        О продукте
+      </a>
+      <a href="#pricing" onClick={closeMenu}>
+        Тарифы
+      </a>
+      <a href="#faq" onClick={closeMenu}>
+        Вопросы
+      </a>
+    </nav>
+
+    <div className="header-actions">
+      <a className="button button-outline" href="#login">
+        Войти
+      </a>
+      <a className="button button-primary button-register" href="#register">
+        Зарегистрироваться
+      </a>
+    </div>
+  </header>
+
+  <section className="hero" id="home">
+    <div className="hero-content">
+      <div className="hero-copy">
+        <h1>
+          Персональный
+          <br />
+          помощник по
+          <br />
+          питанию
+        </h1>
+
+        <p className="hero-description">
+          Помогает выбирать блюда из имеющихся
+          <br className="desktop-break" />
+          продуктов, учитывает ваши ограничения
+          <br className="desktop-break" />
+          и цели, рассчитывает КБЖУ и ведет дневник питания.
+        </p>
+
+        <a className="button button-primary hero-button" href="#register">
+          Начать бесплатно
+          <ArrowRight size={17} />
+        </a>
+      </div>
+
+      <div className="features" id="features">
+        {features.map(({ icon: Icon, title, secondLine }) => (
+          <div className="feature" key={title}>
+            <div className="feature-icon">
+              <Icon size={28} strokeWidth={1.35} />
+            </div>
+
+            <p>
+              {title}
+              {secondLine && (
+                <>
+                  <br />
+                  {secondLine}
+                </>
+              )}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div className="nutrition-card">
+      <div className="nutrition-main">
+        <div className="calorie-icon">
+          <Flame size={34} strokeWidth={1.8} />
         </div>
+
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
+          <strong className="calorie-value">536 ккал</strong>
+          <span className="calorie-caption">на порцию</span>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </div>
 
-      <div className="ticks"></div>
+      <div className="macros">
+        <span>Б 22 г</span>
+        <span>Ж 18 г</span>
+        <span>У 62 г</span>
+      </div>
+    </div>
+  </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+  <div className="bottom-decoration" aria-hidden="true">
+    <span />
+    <span />
+    <span />
+  </div>
+</main>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+);
 }
 
-export default App
+export default App;

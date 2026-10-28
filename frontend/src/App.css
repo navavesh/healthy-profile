@@ -1,184 +1,584 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+#root {
+min-height: 100vh;
+}
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+.landing {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background-image: url("/main.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header {
+position: relative;
+z-index: 5;
+display: grid;
+grid-template-columns: 220px 1fr 280px;
+align-items: center;
+gap: 24px;
+min-height: 76px;
+padding: 14px 2.7%;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  display: block;
+  width: 290px;
+  height: 75px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.navigation {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: clamp(18px, 3vw, 38px);
+}
+
+.navigation a {
+color: #191d19;
+font-size: 12px;
+white-space: nowrap;
+transition: color 160ms ease;
+}
+
+.navigation a:hover {
+color: #38765b;
+}
+
+.header-actions {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 5px;
+}
+
+.button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+min-height: 38px;
+padding: 0 17px;
+border: 1px solid transparent;
+border-radius: 9px;
+font-size: 12px;
+font-weight: 600;
+white-space: nowrap;
+cursor: pointer;
+transition:
+background 160ms ease,
+color 160ms ease,
+transform 160ms ease;
+}
+
+.button:hover {
+transform: translateY(-1px);
+}
+
+.button-primary {
+color: #ffffff;
+background: #285e49;
+}
+
+.button-primary:hover {
+background: #1e4c3a;
+}
+
+.button-outline {
+color: #285e49;
+border-color: #91ab9d;
+background: rgba(255, 255, 255, 0.8);
+}
+
+.button-outline:hover {
+background: #eef5e9;
+}
+
+.mobile-menu-button {
+display: none;
+align-items: center;
+justify-content: center;
+width: 42px;
+height: 42px;
+color: #123f31;
+border: 1px solid #dce5d9;
+border-radius: 10px;
+background: white;
+}
+
+.features {
+display: grid;
+grid-template-columns: repeat(3, minmax(105px, 125px));
+gap: 15px;
+margin-top: 35px;
+margin-left: 16px;
+}
+
+.feature {
+min-width: 0;
+}
+
+.feature-icon {
+display: grid;
+width: 46px;
+height: 46px;
+margin-bottom: 7px;
+place-items: center;
+color: #18291e;
+border-radius: 16px;
+background: #f0f5e8;
+box-shadow: 0 2px 3px rgba(28, 60, 38, 0.2);
+}
+
+.feature p {
+margin: 0;
+color: #234c40;
+font-size: 11.5px;
+line-height: 1.35;
 }
 
 .hero {
   position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+  display: grid;
+  grid-template-columns: 52% 48%;
+  min-height: calc(100vh - 76px);
+  padding: 21px 0 42px 7.8%;
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
+.hero-content {
   position: relative;
-  width: 100%;
+  z-index: 2;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.nutrition-card {
+  position: absolute;
+  z-index: 3;
+
+  top: 65%;
+  right: 10%;
+
+  width: 258px;
+  padding: 19px 17px 17px;
+
+  border-radius: 27px;
+  background: #fff;
+
+  box-shadow: 0 10px 35px rgba(27, 44, 29, 0.13);
+}
+
+.nutrition-main {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.calorie-icon {
+display: grid;
+flex: 0 0 43px;
+width: 43px;
+height: 43px;
+place-items: center;
+color: #111a12;
+border-radius: 50%;
+background: #e5efd9;
+}
+
+.calorie-value {
+display: block;
+color: #111111;
+font-size: 23px;
+font-weight: 800;
+line-height: 1.15;
+white-space: nowrap;
+}
+
+.calorie-caption {
+display: block;
+color: #343434;
+font-size: 12px;
+}
+
+.macros {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 7px;
+margin-top: 17px;
+}
+
+.macros span {
+padding: 4px 10px;
+color: #17200d;
+border-radius: 999px;
+background: #def0a8;
+font-size: 12px;
+white-space: nowrap;
+}
+
+.bottom-decoration {
+display: none;
+}
+
+/* Планшеты */
+
+@media (max-width: 1000px) {
+.header {
+grid-template-columns: 155px 1fr;
+gap: 16px;
+}
+
+.navigation {
+gap: 18px;
+}
+
+.header-actions {
+grid-column: 2;
+justify-content: flex-end;
+}
+
+.hero {
+grid-template-columns: 53% 47%;
+padding-left: 5%;
+}
+
+.hero-copy h1 {
+font-size: clamp(34px, 4.5vw, 43px);
+}
+
+.hero-description {
+font-size: 14px;
+}
+
+.desktop-break {
+display: none;
+}
+
+.features {
+grid-template-columns: repeat(3, minmax(85px, 1fr));
+gap: 10px;
+margin-left: 0;
+}
+
+.nutrition-card {
+right: 5%;
+width: 235px;
+}
+}
+
+/* Мобильные устройства */
+
+@media (max-width: 680px) {
+.header {
+display: flex;
+justify-content: space-between;
+min-height: 68px;
+padding: 12px 18px;
+}
+
+.brand-icon {
+width: 31px;
+height: 31px;
+}
+
+.mobile-menu-button {
+display: inline-flex;
+}
+
+.navigation {
+position: absolute;
+top: 61px;
+right: 16px;
+left: 16px;
+display: none;
+flex-direction: column;
+align-items: stretch;
+gap: 0;
+padding: 8px;
+border: 1px solid #e4e9dc;
+border-radius: 14px;
+background: #ffffff;
+box-shadow: 0 12px 32px rgba(20, 49, 32, 0.12);
+}
+
+.navigation-open {
+display: flex;
+}
+
+.navigation a {
+padding: 13px 12px;
+border-radius: 8px;
+font-size: 14px;
+}
+
+.navigation a:hover {
+background: #f0f5e8;
+}
+
+.header-actions {
+display: none;
+}
+
+.hero {
+display: flex;
+flex-direction: column;
+min-height: auto;
+padding: 22px 20px 36px;
+}
+
+.hero-copy h1 {
+font-size: clamp(36px, 9vw, 46px);
+letter-spacing: -1.4px;
+}
+
+.hero-description {
+margin-top: 12px;
+font-size: 14px;
+line-height: 1.55;
+}
+
+.desktop-break {
+display: none;
+}
+
+.hero-button {
+margin-top: 18px;
+}
+
+.features {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 10px;
+width: 100%;
+margin-top: 26px;
+}
+
+.feature-icon {
+width: 42px;
+height: 42px;
+}
+
+.feature p {
+font-size: 10px;
+}
+
+.hero-visual {
+min-height: 310px;
+margin: 28px -20px -36px;
+}
+
+.food-photo {
+inset: 0;
+}
+
+.food-photo::before {
+top: 4%;
+left: 15%;
+width: 74%;
+border-width: 7px;
+}
+
+.nutrition-card {
+right: 5%;
+bottom: 8%;
+width: 228px;
+padding: 15px;
+border-radius: 22px;
+}
+
+.calorie-value {
+font-size: 21px;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+scroll-behavior: auto !important;
+transition-duration: 0.01ms !important;
+}
+}
+
+/* ===== Увеличенный масштаб главной страницы ===== */
+
+@media (min-width: 1001px) {
+/* Навигация */
+
+.header {
+grid-template-columns: 240px 1fr 340px;
+gap: 20px;
+}
+
+.navigation {
+gap: clamp(22px, 2.5vw, 42px);
+}
+
+.navigation a {
+font-size: 14px;
+}
+
+/* Кнопки в шапке */
+
+.header-actions {
+gap: 7px;
+}
+
+.header-actions .button {
+min-height: 43px;
+padding: 0 19px;
+font-size: 13.5px;
+border-radius: 10px;
+}
+
+/* Основная область */
+
+.hero {
+grid-template-columns: 54% 46%;
+padding-left: 10%;
+}
+
+.hero-content {
+padding-top: 32px;
+}
+
+.hero-copy {
+max-width: 650px;
+}
+
+/* Заголовок */
+
+.hero-copy h1 {
+margin-bottom: 16px;
+font-size: clamp(56px, 4.1vw, 68px);
+line-height: 1.02;
+letter-spacing: -2.2px;
+}
+
+/* Описание */
+
+.hero-description {
+max-width: 640px;
+font-size: clamp(18px, 1.25vw, 21px);
+line-height: 1.4;
+}
+
+/* Кнопка «Начать бесплатно» */
+
+.hero-button {
+min-height: 52px;
+margin-top: 18px;
+padding: 0 27px;
+gap: 12px;
+font-size: 15px;
+border-radius: 9px;
+}
+
+.hero-button svg {
+width: 19px;
+height: 19px;
+}
+
+/* Преимущества */
+
+.features {
+grid-template-columns: repeat(3, minmax(135px, 155px));
+gap: 24px;
+margin-top: 43px;
+margin-left: 16px;
+}
+
+.feature-icon {
+width: 56px;
+height: 56px;
+margin-bottom: 11px;
+border-radius: 18px;
+}
+
+.feature-icon svg {
+width: 33px;
+height: 33px;
+}
+
+.feature p {
+font-size: 14px;
+line-height: 1.4;
+}
+
+/* Карточка КБЖУ */
+
+.nutrition-card {
+  width: 330px;
+  padding: 25px 24px 22px;
+  border-radius: 32px;
+}
+
+.nutrition-main {
+  gap: 16px;
+}
+
+.calorie-icon {
+  flex-basis: 54px;
+  width: 54px;
+  height: 54px;
+}
+
+.calorie-icon svg {
+  width: 41px;
+  height: 41px;
+}
+
+.calorie-value {
+  font-size: 30px;
+}
+
+.calorie-caption {
+  font-size: 15px;
+}
+
+.macros {
+  gap: 10px;
+  margin-top: 21px;
+}
+
+.macros span {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+}
+/* Убираем лишнюю прокрутку на десктопе */
+
+@media (min-width: 1001px) {
+  html,
+  body,
+  #root {
+    min-height: 100%;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  .landing {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  .header {
+    height: 76px;
+    min-height: 76px;
+  }
+
+  .hero {
+    height: calc(100vh - 76px);
+    min-height: 0;
+    padding-bottom: 0;
   }
 }
