@@ -1,4 +1,4 @@
-import { useState } from "react";
+import type { UserProfile } from "../../types/profile";
 import {
   Target,
   Scale,
@@ -42,13 +42,31 @@ const goals = [
   },
 ];
 
-function ProfileStepTwo() {
-  const [selectedGoal, setSelectedGoal] = useState("");
+interface ProfileStepTwoProps {
+  data: UserProfile["nutrition"];
+  onChange: (data: Partial<UserProfile["nutrition"]>) => void;
+}
 
-  const [calories, setCalories] = useState("");
-  const [proteins, setProteins] = useState("");
-  const [fats, setFats] = useState("");
-  const [carbs, setCarbs] = useState("");
+function ProfileStepTwo({ data, onChange }: ProfileStepTwoProps) {
+  const handleNumberChange = (
+    field: "calories" | "proteins" | "fats" | "carbs",
+    value: string
+  ) => {
+    const digits = value.replace(/\D/g, "");
+
+    if (digits === "") {
+      onChange({ [field]: null });
+      return;
+    }
+
+    const number = Number(digits);
+
+    const max = field === "calories" ? 10000 : 1000;
+
+    if (number <= max) {
+      onChange({ [field]: number });
+    }
+  };
 
   return (
     <div className="profile-step-two">
@@ -73,12 +91,12 @@ function ProfileStepTwo() {
               key={value}
               type="button"
               className={`goal-card ${
-                selectedGoal === value ? "selected" : ""
+                data.goal === value ? "selected" : ""
               }`}
-              onClick={() => setSelectedGoal(value)}
+              onClick={() => onChange({ goal: value })}
             >
               <span className="goal-radio">
-                {selectedGoal === value && <span />}
+                {data.goal === value && <span />}
               </span>
 
               <Icon className="goal-icon" size={42} />
@@ -129,12 +147,13 @@ function ProfileStepTwo() {
 
             <div className="macro-input-row">
               <input
-                type="number"
-                min="500"
-                max="10000"
+                type="text"
+                inputMode="numeric"
                 placeholder="1800"
-                value={calories}
-                onChange={(event) => setCalories(event.target.value)}
+                value={data.calories ?? ""}
+                onChange={(event) =>
+                  handleNumberChange("calories", event.target.value)
+                }
               />
               <span>ккал/день</span>
             </div>
@@ -153,12 +172,15 @@ function ProfileStepTwo() {
 
             <div className="macro-input-row">
               <input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 min="0"
                 max="1000"
                 placeholder="130"
-                value={proteins}
-                onChange={(event) => setProteins(event.target.value)}
+                value={data.proteins ?? ""}
+                onChange={(event) =>
+                  handleNumberChange("proteins", event.target.value)
+                }
               />
               <span>г/день</span>
             </div>
@@ -177,12 +199,15 @@ function ProfileStepTwo() {
 
             <div className="macro-input-row">
               <input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 min="0"
                 max="1000"
                 placeholder="60"
-                value={fats}
-                onChange={(event) => setFats(event.target.value)}
+                value={data.fats ?? ""}
+                onChange={(event) =>
+                  handleNumberChange("fats", event.target.value)
+                }
               />
               <span>г/день</span>
             </div>
@@ -201,12 +226,15 @@ function ProfileStepTwo() {
 
             <div className="macro-input-row">
               <input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 min="0"
                 max="1000"
                 placeholder="180"
-                value={carbs}
-                onChange={(event) => setCarbs(event.target.value)}
+                value={data.carbs ?? ""}
+                onChange={(event) =>
+                  handleNumberChange("carbs", event.target.value)
+                }
               />
               <span>г/день</span>
             </div>

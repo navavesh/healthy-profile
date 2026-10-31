@@ -1,3 +1,4 @@
+import type { UserProfile } from "../../types/profile";
 import { useState } from "react";
 import {
   UserRound,
@@ -44,17 +45,33 @@ const activityLevels = [
   },
 ];
 
-function ProfileStepOne() {
-  const [gender, setGender] = useState<"male" | "female" | "">("");
-  const [age, setAge] = useState("");
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
-  const [activity, setActivity] = useState("low");
+const isValidInteger = (value: string, max: number): boolean => {
+  if (value === "") return true;
 
-  const [sleepSchedule, setSleepSchedule] = useState("7-8");
-  const [mealSchedule, setMealSchedule] = useState("3");
-  const [workMode, setWorkMode] = useState("computer");
+  if (!/^\d+$/.test(value)) return false;
 
+  return Number(value) <= max;
+};
+
+const isValidWeight = (value: string): boolean => {
+  if (value === "") return true;
+
+  if (!/^\d*[.,]?\d*$/.test(value)) return false;
+
+  const number = Number(value.replace(",", "."));
+
+  return Number.isFinite(number) && number <= 300;
+};
+
+interface ProfileStepOneProps {
+  data: UserProfile["personal"];
+  onChange: (data: Partial<UserProfile["personal"]>) => void;
+}
+
+function ProfileStepOne({ data, onChange }: ProfileStepOneProps) {
+  const [weightInput, setWeightInput] = useState(
+    data.weight === null ? "" : String(data.weight)
+  );
   return (
     <div className="profile-step-one">
       <header className="profile-step-header">
@@ -76,16 +93,16 @@ function ProfileStepOne() {
             <div className="gender-options">
               <button
                 type="button"
-                className={gender === "male" ? "selected" : ""}
-                onClick={() => setGender("male")}
+                className={data.gender === "male" ? "selected" : ""}
+                onClick={() => onChange({ gender: "male" })}
               >
                 Мужской
               </button>
 
               <button
                 type="button"
-                className={gender === "female" ? "selected" : ""}
-                onClick={() => setGender("female")}
+                className={data.gender === "female" ? "selected" : ""}
+                onClick={() => onChange({ gender: "female" })}
               >
                 Женский
               </button>
@@ -99,11 +116,18 @@ function ProfileStepOne() {
             </div>
 
             <input
-              type="number"
-              min="14"
-              max="100"
-              value={age}
-              onChange={(event) => setAge(event.target.value)}
+              type="text"
+              inputMode="numeric"
+              value={data.age ?? ""}
+              onChange={(event) => {
+                const value = event.target.value;
+
+                if (isValidInteger(value, 100)) {
+                  onChange({
+                    age: value === "" ? null : Number(value),
+                  });
+                }
+              }}
             />
           </div>
 
@@ -115,11 +139,18 @@ function ProfileStepOne() {
 
             <div className="profile-input-with-unit">
               <input
-                type="number"
-                min="100"
-                max="250"
-                value={height}
-                onChange={(event) => setHeight(event.target.value)}
+                type="text"
+                inputMode="numeric"
+                value={data.height ?? ""}
+                onChange={(event) => {
+                  const value = event.target.value;
+
+                  if (isValidInteger(value, 250)) {
+                    onChange({
+                      height: value === "" ? null : Number(value),
+                    });
+                  }
+                }}
               />
               <span>см</span>
             </div>
@@ -133,12 +164,22 @@ function ProfileStepOne() {
 
             <div className="profile-input-with-unit">
               <input
-                type="number"
-                min="20"
-                max="300"
-                step="0.1"
-                value={weight}
-                onChange={(event) => setWeight(event.target.value)}
+                type="text"
+                inputMode="decimal"
+                value={weightInput}
+                onChange={(event) => {
+                  const value = event.target.value;
+
+                  if (isValidWeight(value)) {
+                    setWeightInput(value);
+
+                    if (value === "" || /[0-9]$/.test(value)) {
+                      onChange({
+                        weight: value === "" ? null : Number(value.replace(",", ".")),
+                      });
+                    }
+                  }
+                }}
               />
               <span>кг</span>
             </div>
@@ -167,12 +208,12 @@ function ProfileStepOne() {
               key={value}
               type="button"
               className={`activity-card ${
-                activity === value ? "selected" : ""
+                data.activity === value ? "selected" : ""
               }`}
-              onClick={() => setActivity(value)}
+              onClick={() => onChange({ activity: value })}
             >
               <span className="activity-radio">
-                {activity === value && <span />}
+                {data.activity === value && <span />}
               </span>
 
               <Icon className="activity-icon" size={34} />
@@ -210,9 +251,12 @@ function ProfileStepOne() {
             </div>
 
             <select
-              value={sleepSchedule}
-              onChange={(event) => setSleepSchedule(event.target.value)}
+              value={data.sleepSchedule}
+              onChange={(event) =>
+                onChange({ sleepSchedule: event.target.value })
+              }
             >
+              <option value="">Выберите режим сна</option>
               <option value="less-6">Менее 6 часов</option>
               <option value="6-7">Около 6–7 часов</option>
               <option value="7-8">Около 7–8 часов</option>
@@ -229,9 +273,12 @@ function ProfileStepOne() {
             </div>
 
             <select
-              value={mealSchedule}
-              onChange={(event) => setMealSchedule(event.target.value)}
+              value={data.mealSchedule}
+              onChange={(event) =>
+                onChange({ mealSchedule: event.target.value })
+              }
             >
+              <option value="">Выберите график питания</option>
               <option value="2">2 раза в день</option>
               <option value="3">3 раза в день</option>
               <option value="4">4 раза в день</option>
@@ -247,9 +294,12 @@ function ProfileStepOne() {
             </div>
 
             <select
-              value={workMode}
-              onChange={(event) => setWorkMode(event.target.value)}
+              value={data.workMode}
+              onChange={(event) =>
+                onChange({ workMode: event.target.value })
+              }
             >
+              <option value="">Выберите рабочий режим</option>
               <option value="computer">В основном за компьютером</option>
               <option value="standing">Преимущественно стоя</option>
               <option value="moving">Постоянно в движении</option>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import type { UserProfile } from "../../types/profile";
+
 import {
   HeartPulse,
   Info,
@@ -10,11 +11,20 @@ import {
 
 import "./ProfileStepFour.css";
 
-type HealthStatus = "none" | "has_details" | "prefer_not" | "";
+interface ProfileStepFourProps {
+  data: UserProfile["health"];
+  onChange: (data: Partial<UserProfile["health"]>) => void;
+}
 
-function ProfileStepFour() {
-  const [healthStatus, setHealthStatus] = useState<HealthStatus>("");
-  const [healthDetails, setHealthDetails] = useState("");
+function ProfileStepFour({ data, onChange }: ProfileStepFourProps) {
+  const selectStatus = (
+    status: UserProfile["health"]["status"]
+  ) => {
+    onChange({
+      status,
+      details: status === "has_details" ? data.details : "",
+    });
+  };
 
   return (
     <div className="profile-step-four">
@@ -36,9 +46,9 @@ function ProfileStepFour() {
           <button
             type="button"
             className={`health-option-card ${
-              healthStatus === "none" ? "selected" : ""
+              data.status === "none" ? "selected" : ""
             }`}
-            onClick={() => setHealthStatus("none")}
+            onClick={() => selectStatus("none")}
           >
             <span className="health-option-icon">
               <ShieldCheck size={32} />
@@ -52,16 +62,16 @@ function ProfileStepFour() {
             </span>
 
             <span className="health-radio">
-              {healthStatus === "none" && <span />}
+              {data.status === "none" && <span />}
             </span>
           </button>
 
           <button
             type="button"
             className={`health-option-card ${
-              healthStatus === "has_details" ? "selected" : ""
+              data.status === "has_details" ? "selected" : ""
             }`}
-            onClick={() => setHealthStatus("has_details")}
+            onClick={() => selectStatus("has_details")}
           >
             <span className="health-option-icon">
               <Stethoscope size={32} />
@@ -75,16 +85,16 @@ function ProfileStepFour() {
             </span>
 
             <span className="health-radio">
-              {healthStatus === "has_details" && <span />}
+              {data.status === "has_details" && <span />}
             </span>
           </button>
 
           <button
             type="button"
             className={`health-option-card ${
-              healthStatus === "prefer_not" ? "selected" : ""
+              data.status === "prefer_not" ? "selected" : ""
             }`}
-            onClick={() => setHealthStatus("prefer_not")}
+            onClick={() => selectStatus("prefer_not")}
           >
             <span className="health-option-icon">
               <CircleHelp size={32} />
@@ -97,13 +107,13 @@ function ProfileStepFour() {
             </span>
 
             <span className="health-radio">
-              {healthStatus === "prefer_not" && <span />}
+              {data.status === "prefer_not" && <span />}
             </span>
           </button>
         </div>
       </section>
 
-      {healthStatus === "has_details" && (
+      {data.status === "has_details" && (
         <section className="profile-section health-details-section">
           <div className="profile-section-title">
             <MessageSquareText size={23} />
@@ -116,15 +126,17 @@ function ProfileStepFour() {
           </p>
 
           <textarea
-            value={healthDetails}
-            onChange={(event) => setHealthDetails(event.target.value)}
+            value={data.details}
+            onChange={(event) =>
+              onChange({ details: event.target.value })
+            }
             placeholder="Например: специалист рекомендовал ограничить потребление соли..."
             rows={5}
             maxLength={1000}
           />
 
           <div className="health-character-count">
-            {healthDetails.length}/1000
+            {data.details.length}/1000
           </div>
         </section>
       )}

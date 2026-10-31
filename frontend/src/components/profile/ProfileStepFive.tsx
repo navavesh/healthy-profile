@@ -1,4 +1,5 @@
-import { useState } from "react";
+import type { UserProfile } from "../../types/profile";
+
 import {
   Utensils,
   Clock,
@@ -45,17 +46,18 @@ const cookingOptions = [
   },
 ];
 
-function ProfileStepFive() {
-  const [cuisines, setCuisines] = useState<string[]>([]);
-  const [cookingTime, setCookingTime] = useState("");
-  const [additionalPreferences, setAdditionalPreferences] = useState("");
+interface ProfileStepFiveProps {
+  data: UserProfile["preferences"];
+  onChange: (data: Partial<UserProfile["preferences"]>) => void;
+}
 
+function ProfileStepFive({ data, onChange }: ProfileStepFiveProps) {
   const toggleCuisine = (cuisine: string) => {
-    setCuisines((current) =>
-      current.includes(cuisine)
-        ? current.filter((item) => item !== cuisine)
-        : [...current, cuisine]
-    );
+    const updatedCuisines = data.cuisines.includes(cuisine)
+      ? data.cuisines.filter((item) => item !== cuisine)
+      : [...data.cuisines, cuisine];
+
+    onChange({ cuisines: updatedCuisines });
   };
 
   return (
@@ -86,10 +88,10 @@ function ProfileStepFive() {
               type="button"
               key={cuisine}
               className={`cuisine-chip ${
-                cuisines.includes(cuisine) ? "selected" : ""
+                data.cuisines.includes(cuisine) ? "selected" : ""
               }`}
               onClick={() => toggleCuisine(cuisine)}
-              aria-pressed={cuisines.includes(cuisine)}
+              aria-pressed={data.cuisines.includes(cuisine)}
             >
               {cuisine}
             </button>
@@ -110,13 +112,13 @@ function ProfileStepFive() {
               type="button"
               key={option.value}
               className={`cooking-card ${
-                cookingTime === option.value ? "selected" : ""
+                data.cookingTime === option.value ? "selected" : ""
               }`}
-              onClick={() => setCookingTime(option.value)}
-              aria-pressed={cookingTime === option.value}
+              onClick={() => onChange({ cookingTime: option.value })}
+              aria-pressed={data.cookingTime === option.value}
             >
               <span className="cooking-radio">
-                {cookingTime === option.value && <span />}
+                {data.cookingTime === option.value && <span />}
               </span>
 
               <CookingPot size={30} />
@@ -143,9 +145,11 @@ function ProfileStepFive() {
 
         <textarea
           className="preference-textarea"
-          value={additionalPreferences}
+          value={data.additionalPreferences}
           onChange={(event) =>
-            setAdditionalPreferences(event.target.value.slice(0, 1000))
+            onChange({
+              additionalPreferences: event.target.value.slice(0, 1000),
+            })
           }
           placeholder="Например: предпочитаю блюда с небольшим количеством ингредиентов, люблю домашнюю кухню..."
           rows={5}
@@ -153,7 +157,7 @@ function ProfileStepFive() {
         />
 
         <div className="preference-character-count">
-          {additionalPreferences.length}/1000
+          {data.additionalPreferences.length}/1000
         </div>
       </section>
 

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
+import type { UserProfile } from "../../types/profile";
+
 import {
   ShieldAlert,
   AlertCircle,
@@ -40,7 +43,7 @@ const stopProductOptions = [
 interface RestrictionSectionProps {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   options: string[];
   selected: string[];
   onChange: (value: string[]) => void;
@@ -69,9 +72,12 @@ function RestrictionSection({
   const addCustomValue = () => {
     const value = customValue.trim();
 
-    if (!value || selected.some(
-      (item) => item.toLowerCase() === value.toLowerCase()
-    )) {
+    if (
+      !value ||
+      selected.some(
+        (item) => item.toLowerCase() === value.toLowerCase()
+      )
+    ) {
       return;
     }
 
@@ -115,6 +121,7 @@ function RestrictionSection({
           type="text"
           placeholder={placeholder}
           value={customValue}
+          maxLength={100}
           onChange={(event) => setCustomValue(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
@@ -161,19 +168,37 @@ function RestrictionSection({
   );
 }
 
-function ProfileStepThree() {
-  const [allergies, setAllergies] = useState<string[]>([]);
-  const [intolerances, setIntolerances] = useState<string[]>([]);
-  const [stopProducts, setStopProducts] = useState<string[]>([]);
-  const [noRestrictions, setNoRestrictions] = useState(false);
+interface ProfileStepThreeProps {
+  data: UserProfile["restrictions"];
+  onChange: (data: Partial<UserProfile["restrictions"]>) => void;
+}
+
+function ProfileStepThree({
+  data,
+  onChange,
+}: ProfileStepThreeProps) {
+  const handleRestrictionsChange = (
+    field: "allergies" | "intolerances" | "stopProducts",
+    value: string[]
+  ) => {
+    onChange({
+      [field]: value,
+      noRestrictions: false,
+    });
+  };
 
   const handleNoRestrictions = (checked: boolean) => {
-    setNoRestrictions(checked);
-
     if (checked) {
-      setAllergies([]);
-      setIntolerances([]);
-      setStopProducts([]);
+      onChange({
+        noRestrictions: true,
+        allergies: [],
+        intolerances: [],
+        stopProducts: [],
+      });
+    } else {
+      onChange({
+        noRestrictions: false,
+      });
     }
   };
 
@@ -202,8 +227,10 @@ function ProfileStepThree() {
           description="Продукты, которые могут вызывать у вас аллергическую реакцию"
           icon={<ShieldAlert size={27} />}
           options={allergyOptions}
-          selected={allergies}
-          onChange={setAllergies}
+          selected={data.allergies}
+          onChange={(value) =>
+            handleRestrictionsChange("allergies", value)
+          }
           placeholder="Добавить другой аллерген..."
         />
 
@@ -212,8 +239,10 @@ function ProfileStepThree() {
           description="Продукты или компоненты, которые ваш организм плохо переносит"
           icon={<AlertCircle size={27} />}
           options={intoleranceOptions}
-          selected={intolerances}
-          onChange={setIntolerances}
+          selected={data.intolerances}
+          onChange={(value) =>
+            handleRestrictionsChange("intolerances", value)
+          }
           placeholder="Добавить другую непереносимость..."
         />
 
@@ -222,8 +251,10 @@ function ProfileStepThree() {
           description="Ингредиенты, которые вы не хотите видеть в своих блюдах"
           icon={<Ban size={27} />}
           options={stopProductOptions}
-          selected={stopProducts}
-          onChange={setStopProducts}
+          selected={data.stopProducts}
+          onChange={(value) =>
+            handleRestrictionsChange("stopProducts", value)
+          }
           placeholder="Добавить нежелательный продукт..."
         />
       </div>
@@ -231,8 +262,10 @@ function ProfileStepThree() {
       <label className="no-restrictions-option">
         <input
           type="checkbox"
-          checked={noRestrictions}
-          onChange={(event) => handleNoRestrictions(event.target.checked)}
+          checked={data.noRestrictions}
+          onChange={(event) =>
+            handleNoRestrictions(event.target.checked)
+          }
         />
 
         <span className="no-restrictions-checkbox" />
