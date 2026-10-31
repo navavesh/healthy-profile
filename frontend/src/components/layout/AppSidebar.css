@@ -1,0 +1,224 @@
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 288px;
+  padding: 24px 18px;
+
+  background: #f0f1d5;
+  border-right: 1px solid rgba(80, 100, 50, 0.1);
+
+  transition: width 280ms cubic-bezier(0.2, 0, 0, 1);
+
+  overflow: hidden;
+}
+
+.app-sidebar.collapsed {
+  width: 88px;
+}
+
+/* Верхняя часть */
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  min-height: 62px;
+  margin-bottom: 45px;
+}
+
+.sidebar-logo {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 185px;
+  height: 75px;
+
+  flex-shrink: 0;
+}
+
+.sidebar-logo-full {
+  width: 185px;
+  height: 75px;
+
+  object-fit: contain;
+  object-position: left center;
+
+  transition: opacity 180ms ease;
+}
+
+.sidebar-logo-icon {
+  position: absolute;
+  top: 50%;
+  left: -12px;
+
+  width: 80px;
+  height: 80px;
+
+  object-fit: contain;
+
+  opacity: 0;
+  transform: translateY(-50%);
+
+  transition: opacity 180ms ease;
+}
+
+.app-sidebar.collapsed .sidebar-logo-full {
+  opacity: 0;
+}
+
+.app-sidebar.collapsed .sidebar-logo-icon {
+  opacity: 1;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  width: 16px;
+  height: 16px;
+  padding: 0;
+
+  border: none;
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.55);
+  color: #285e49;
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  transition:
+    background 160ms ease,
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+.sidebar-toggle:hover {
+  background: #dce8c7;
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.app-sidebar:hover .sidebar-toggle {
+  opacity: 1;
+}
+
+.app-sidebar.collapsed .sidebar-logo {
+  width: 45px;
+}
+
+.app-sidebar.collapsed .sidebar-top {
+  justify-content: space-between;
+}
+
+.sidebar-toggle:hover {
+  background: #dce8c7;
+}
+
+/* Навигация */
+
+.sidebar-navigation,
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.sidebar-link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  width: 100%;
+  min-height: 43px;
+  padding: 10px 13px;
+
+  flex-shrink: 0;
+  overflow: hidden;
+
+  border-radius: 11px;
+
+  color: #111;
+  text-decoration: none;
+  white-space: nowrap;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition:
+    background 180ms ease,
+    padding 280ms ease,
+    gap 280ms ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(204, 222, 174, 0.65);
+}
+
+.sidebar-link.active {
+  background: #cfe0b1;
+}
+
+.sidebar-link svg {
+  flex-shrink: 0;
+}
+
+.sidebar-link-label {
+  opacity: 1;
+  transform: translateX(0);
+
+  transition:
+    opacity 160ms ease,
+    transform 220ms ease;
+}
+
+/* Свёрнутое состояние */
+
+.app-sidebar.collapsed .sidebar-link {
+  justify-content: center;
+  gap: 0;
+  padding: 10px 0;
+}
+
+.app-sidebar.collapsed .sidebar-link-label {
+  position: absolute;
+
+  opacity: 0;
+  transform: translateX(-8px);
+
+  pointer-events: none;
+}
+
+/* Нижняя навигация */
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+/* Адаптация */
+
+@media (max-width: 650px) {
+  .app-sidebar {
+    display: none;
+  }
+}

@@ -1,0 +1,186 @@
+.profile-step-four {
+  width: 100%;
+  max-width: 1400px;
+  color: #103f32;
+}
+
+.health-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.health-option-card {
+  position: relative;
+  min-width: 0;
+  min-height: 220px;
+  padding: 25px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  border: 1px solid #d6d9d2;
+  border-radius: 21px;
+  background: #fff;
+  color: #174b38;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.health-option-card:hover {
+  border-color: #a9cd83;
+  box-shadow: 0 3px 9px rgba(37, 82, 53, 0.08);
+}
+
+.health-option-card.selected {
+  border: 1.5px solid #80ad70;
+  background: #f2f8e9;
+}
+
+.health-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 18px;
+  background: #f0f5e7;
+  color: #67995a;
+}
+
+.health-option-card strong {
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.health-option-card > span:not(.health-option-icon):not(.health-radio) {
+  max-width: 270px;
+  color: #778681;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.health-radio {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 19px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #d7dfe0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.health-option-card.selected .health-radio {
+  border-color: #174b38;
+}
+
+.health-radio span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #174b38;
+}
+
+/* Дополнительная информация */
+
+.health-details-section {
+  margin-top: 32px;
+}
+
+.health-details-description {
+  margin: -5px 0 15px;
+  color: #778681;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.health-details-section textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 15px;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid #d8ded7;
+  border-radius: 14px;
+  outline: none;
+  background: #fff;
+  color: #244c3b;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.health-details-section textarea:focus {
+  border-color: #9fc778;
+  box-shadow: 0 0 0 2px rgba(159, 199, 120, 0.15);
+}
+
+.health-details-section textarea::placeholder {
+  color: #a1aaa5;
+}
+
+.health-character-count {
+  margin-top: 7px;
+  color: #89958f;
+  font-size: 12px;
+  text-align: right;
+}
+
+/* Информационное предупреждение */
+
+.health-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 30px;
+  padding: 17px 20px;
+  border: 1px solid #e2e8d9;
+  border-radius: 15px;
+  background: #f5f7ef;
+  color: #557263;
+}
+
+.health-notice > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #739b5e;
+}
+
+.health-notice strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #315d43;
+  font-size: 14px;
+}
+
+.health-notice p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .health-options {
+    grid-template-columns: 1fr;
+  }
+
+  .health-option-card {
+    min-height: 170px;
+  }
+}
+
+@media (max-width: 600px) {
+  .health-option-card {
+    padding: 22px 16px;
+  }
+
+  .health-notice {
+    padding: 15px;
+  }
+}

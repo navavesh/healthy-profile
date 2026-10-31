@@ -1,0 +1,238 @@
+.profile-step-three {
+  width: 100%;
+  max-width: 1400px;
+  color: #103f32;
+}
+
+.restriction-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 25px 0;
+  padding: 15px 18px;
+  border-radius: 14px;
+  background: #f0f5e7;
+  color: #557263;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.restriction-notice svg {
+  flex-shrink: 0;
+  color: #739b5e;
+}
+
+.restriction-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.restriction-card {
+  padding: 24px;
+  border: 1px solid #d8ded7;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08);
+}
+
+.restriction-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+  color: #174b38;
+}
+
+.restriction-heading > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #67995a;
+}
+
+.restriction-heading h3 {
+  margin: 0 0 5px;
+  font-size: 20px;
+  font-weight: 650;
+}
+
+.restriction-heading p {
+  margin: 0;
+  color: #7b8983;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.restriction-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.restriction-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border: 1px solid #d8ded7;
+  border-radius: 25px;
+  background: #fff;
+  color: #365548;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.restriction-chip:hover {
+  border-color: #9fc778;
+  background: #f8fbf3;
+}
+
+.restriction-chip.selected {
+  border-color: #8eb875;
+  background: #eaf3df;
+  color: #174b38;
+}
+
+.restriction-custom {
+  display: flex;
+  gap: 10px;
+  max-width: 480px;
+  margin-top: 20px;
+}
+
+.restriction-custom input {
+  flex: 1;
+  min-width: 0;
+  height: 43px;
+  padding: 0 14px;
+  border: 1px solid #d8ded7;
+  border-radius: 11px;
+  outline: none;
+  color: #244c3b;
+  font-size: 14px;
+}
+
+.restriction-custom input:focus {
+  border-color: #9fc778;
+  box-shadow: 0 0 0 2px rgba(159, 199, 120, 0.15);
+}
+
+.restriction-custom button {
+  width: 44px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 11px;
+  background: #a9cd83;
+  color: #174b38;
+  cursor: pointer;
+}
+
+.restriction-custom button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.restriction-selected {
+  margin-top: 18px;
+}
+
+.restriction-selected-label {
+  display: block;
+  margin-bottom: 9px;
+  color: #778681;
+  font-size: 12px;
+}
+
+.restriction-selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.restriction-selected-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #f0f5e7;
+  color: #365548;
+  font-size: 13px;
+}
+
+.restriction-selected-item button {
+  display: flex;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #71827c;
+  cursor: pointer;
+}
+
+.no-restrictions-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 17px 20px;
+  border: 1px solid #d8ded7;
+  border-radius: 14px;
+  background: #fff;
+  color: #365548;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.no-restrictions-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.no-restrictions-checkbox {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b9c7b8;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.no-restrictions-option input:checked + .no-restrictions-checkbox {
+  border-color: #78a85e;
+  background: #a9cd83;
+}
+
+.no-restrictions-option input:checked + .no-restrictions-checkbox::after {
+  content: "✓";
+  color: #174b38;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@media (max-width: 650px) {
+  .restriction-card {
+    padding: 18px;
+  }
+
+  .restriction-heading h3 {
+    font-size: 17px;
+  }
+
+  .restriction-chip {
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  .no-restrictions-option {
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+}

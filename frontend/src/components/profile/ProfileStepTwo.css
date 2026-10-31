@@ -1,0 +1,256 @@
+.profile-step-two {
+  width: 100%;
+  max-width: 1400px;
+  color: #103f32;
+}
+
+/* Цели питания */
+
+.goal-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.goal-card {
+  position: relative;
+  min-width: 0;
+  min-height: 220px;
+  padding: 25px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #d6d9d2;
+  border-radius: 21px;
+  background: #fff;
+  color: #174b38;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.goal-card:hover {
+  border-color: #a9cd83;
+  box-shadow: 0 3px 9px rgba(37, 82, 53, 0.08);
+}
+
+.goal-card.selected {
+  border: 1.5px solid #80ad70;
+  background: #f2f8e9;
+  box-shadow: inset 0 0 0 1px rgba(128, 173, 112, 0.12);
+}
+
+.goal-radio {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #d7dfe0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.goal-card.selected .goal-radio {
+  border-color: #174b38;
+}
+
+.goal-radio span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #174b38;
+}
+
+.goal-icon {
+  margin: 8px 0 3px;
+  color: #629b52;
+}
+
+.goal-card strong {
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.goal-description {
+  max-width: 220px;
+  color: #778681;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* КБЖУ */
+
+.macro-section {
+  margin-top: 38px;
+}
+
+.macro-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.macro-heading .profile-section-title {
+  margin-bottom: 5px;
+}
+
+.macro-subtitle {
+  margin: 0;
+  color: #71827c;
+  font-size: 15px;
+}
+
+.macro-calculate-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 20px;
+  border: 1px solid #d8e5c9;
+  border-radius: 25px;
+  background: #f2f7e9;
+  color: #285a3c;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.macro-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.macro-card {
+  min-width: 0;
+  padding: 20px 17px;
+  border: 1px solid #e0e3dc;
+  border-radius: 18px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.macro-card-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #244c3b;
+}
+
+.macro-card-title strong {
+  font-size: 15px;
+}
+
+.macro-card-title svg:last-child {
+  color: #a6b2ad;
+}
+
+.macro-card:nth-child(1) .macro-card-title svg:first-child {
+  color: #d89b37;
+}
+
+.macro-card:nth-child(2) .macro-card-title svg:first-child {
+  color: #8fae83;
+}
+
+.macro-card:nth-child(3) .macro-card-title svg:first-child {
+  color: #d9b64c;
+}
+
+.macro-card:nth-child(4) .macro-card-title svg:first-child {
+  color: #b5a15b;
+}
+
+.macro-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.macro-input-row input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  border: 1px solid #d9ded7;
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: #244c3b;
+  font-size: 16px;
+}
+
+.macro-input-row input:focus {
+  border-color: #9fc778;
+  box-shadow: 0 0 0 2px rgba(159, 199, 120, 0.15);
+}
+
+.macro-input-row span {
+  flex-shrink: 0;
+  color: #71827c;
+  font-size: 12px;
+}
+
+.macro-hint {
+  color: #84938d;
+  font-size: 12px;
+}
+
+.macro-information {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 15px 18px;
+  border-radius: 15px;
+  background: #f0f5e7;
+  color: #557263;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.macro-information svg {
+  flex-shrink: 0;
+  color: #739b5e;
+}
+
+/* Адаптивность */
+
+@media (max-width: 1100px) {
+  .goal-options,
+  .macro-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .goal-options,
+  .macro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .goal-card {
+    min-height: 180px;
+  }
+
+  .macro-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .macro-calculate-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,191 @@
+.profile-step-five {
+  width: 100%;
+  max-width: 1400px;
+  color: #103f32;
+}
+
+.preference-description {
+  margin: -5px 0 18px;
+  color: #778681;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Выбор кухни */
+
+.cuisine-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cuisine-chip {
+  padding: 12px 19px;
+  border: 1px solid #d8ded7;
+  border-radius: 25px;
+  background: #fff;
+  color: #365548;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cuisine-chip:hover {
+  border-color: #9fc778;
+  background: #f8fbf3;
+}
+
+.cuisine-chip.selected {
+  border-color: #8eb875;
+  background: #eaf3df;
+  color: #174b38;
+}
+
+/* Время приготовления */
+
+.cooking-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cooking-card {
+  position: relative;
+  min-width: 0;
+  min-height: 160px;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #d8ded7;
+  border-radius: 20px;
+  background: #fff;
+  color: #174b38;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cooking-card:hover {
+  border-color: #a9cd83;
+}
+
+.cooking-card.selected {
+  border: 1.5px solid #80ad70;
+  background: #f2f8e9;
+}
+
+.cooking-card > svg {
+  color: #67995a;
+}
+
+.cooking-card strong {
+  font-size: 16px;
+}
+
+.cooking-card > span:last-child {
+  color: #778681;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cooking-radio {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #d7dfe0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.cooking-card.selected .cooking-radio {
+  border-color: #174b38;
+}
+
+.cooking-radio span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #174b38;
+}
+
+/* Дополнительные пожелания */
+
+.preference-textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 15px;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid #d8ded7;
+  border-radius: 14px;
+  outline: none;
+  background: #fff;
+  color: #244c3b;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.preference-textarea:focus {
+  border-color: #9fc778;
+  box-shadow: 0 0 0 2px rgba(159, 199, 120, 0.15);
+}
+
+.preference-textarea::placeholder {
+  color: #a1aaa5;
+}
+
+.preference-character-count {
+  margin-top: 7px;
+  color: #89958f;
+  font-size: 12px;
+  text-align: right;
+}
+
+/* Информационный блок */
+
+.preference-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 16px 19px;
+  border-radius: 15px;
+  background: #f0f5e7;
+  color: #557263;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.preference-notice svg {
+  flex-shrink: 0;
+  color: #739b5e;
+}
+
+@media (max-width: 1100px) {
+  .cooking-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .cooking-options {
+    grid-template-columns: 1fr;
+  }
+
+  .cooking-card {
+    min-height: 130px;
+  }
+
+  .cuisine-chip {
+    padding: 10px 14px;
+  }
+}

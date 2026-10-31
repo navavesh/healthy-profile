@@ -1,0 +1,29 @@
+.dashboard-layout {
+  min-height: 100vh;
+  background: #fafaf5;
+}
+
+.dashboard-main {
+  min-height: 100vh;
+  margin-left: 88px;
+  padding: 40px 42px;
+
+  transition: margin-left 280ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dashboard-layout.sidebar-expanded .dashboard-main {
+  margin-left: 262px;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-main {
+    padding: 30px 24px;
+  }
+}
+
+@media (max-width: 650px) {
+  .dashboard-main {
+    margin-left: 0;
+    padding: 24px 18px;
+  }
+}
