@@ -3,31 +3,24 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
-
 from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.engine import URL
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
-
-
-class Settings(BaseSettings):
-    DB_PASSWORD: str
-
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-    )
+from app.core.config import settings
 
 
-settings = Settings()
-
-DATABASE_URL = (
-    f"postgresql+asyncpg://healthy_user:"
-    f"{settings.DB_PASSWORD}@localhost:5432/healthy_profile"
+DATABASE_URL = URL.create(
+    drivername="postgresql+asyncpg",
+    username=settings.DB_USER,
+    password=settings.DB_PASSWORD,
+    host=settings.DB_HOST,
+    port=settings.DB_PORT,
+    database=settings.DB_NAME,
 )
 
 engine = create_async_engine(
     DATABASE_URL,
-    echo=True,
+    echo=settings.DEBUG,
     pool_pre_ping=True,
 )
 
