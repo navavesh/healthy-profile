@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:17
+    container_name: healthy_profile_db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: healthy_profile
+      POSTGRES_USER: healthy_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U healthy_user -d healthy_profile"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
