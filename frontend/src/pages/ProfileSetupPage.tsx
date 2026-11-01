@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { initialProfile } from "../types/profile";
+import { useNavigate } from "react-router-dom";
 import type { UserProfile } from "../types/profile";
+import { loadProfile, saveProfile } from "../utils/profileStorage";
 
 import ProfileProgress from "../components/profile/ProfileProgress";
 import ProfileStepOne from "../components/profile/ProfileStepOne";
@@ -12,10 +13,9 @@ import ProfileStepFive from "../components/profile/ProfileStepFive";
 import "./ProfileSetupPage.css";
 
 function ProfileSetupPage() {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
-
-  const [profileData, setProfileData] =
-  useState<UserProfile>(initialProfile);
+  const [profileData, setProfileData] = useState<UserProfile>(() => loadProfile());
 
   const updatePersonalData = (
     data: Partial<UserProfile["personal"]>
@@ -149,11 +149,14 @@ function ProfileSetupPage() {
   };
 
   const handleNext = () => {
-    if (!isCurrentStepValid()) return;
-
-    if (currentStep < 5) {
-      setCurrentStep((prev) => prev + 1);
+    if (currentStep === 5) {
+      saveProfile(profileData);
+      navigate("/profile");
+      return;
     }
+
+    if (!isCurrentStepValid()) return;
+    setCurrentStep((prev) => prev + 1);
   };
 
   const handleBack = () => {

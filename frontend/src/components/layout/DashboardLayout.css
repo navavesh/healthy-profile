@@ -1,29 +1,37 @@
 .dashboard-layout {
   min-height: 100vh;
-  background: #fafaf5;
+  background-color: #fafaf5;
+  background-image: url("/dashboard-bg-gauss.png");
+  background-position: top right;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+.dashboard-layout.dashboard-home {
+  background-image: url("/dashboard-bg-gauss.png");
 }
 
 .dashboard-main {
+  box-sizing: border-box;
   min-height: 100vh;
   margin-left: 88px;
-  padding: 40px 42px;
-
+  padding: 0;
   transition: margin-left 280ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .dashboard-layout.sidebar-expanded .dashboard-main {
-  margin-left: 262px;
+  margin-left: 288px;
 }
 
 @media (max-width: 1000px) {
-  .dashboard-main {
-    padding: 30px 24px;
+  .dashboard-layout.sidebar-expanded .dashboard-main {
+    margin-left: 288px;
   }
 }
 
 @media (max-width: 650px) {
-  .dashboard-main {
+  .dashboard-main,
+  .dashboard-layout.sidebar-expanded .dashboard-main {
     margin-left: 0;
-    padding: 24px 18px;
   }
 }

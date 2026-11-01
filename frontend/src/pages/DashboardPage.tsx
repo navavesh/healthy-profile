@@ -27,7 +27,7 @@ function DashboardPage() {
   }
 
   return (
-    <>
+    <div className="dashboard-page">
       <header className="dashboard-header">
         <div>
           <h1>Добро пожаловать!</h1>
@@ -71,7 +71,7 @@ function DashboardPage() {
       <AIChatBanner />
 
       <DashboardOverview />
-    </>
+    </div>
   );
 }
 

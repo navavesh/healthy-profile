@@ -1,0 +1,92 @@
+/* Единая геометрия внутренних страниц приложения.
+   Меняйте значения здесь, а не в стилях каждой страницы отдельно. */
+:root {
+  --page-content-max: 1400px;
+  --page-gutter: clamp(24px, 4vw, 64px);
+  --page-top-space: 30px;
+  --page-bottom-space: 70px;
+}
+
+.dashboard-page,
+.collection-page,
+.products-page,
+.profile-page,
+.profile-setup-page {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--page-top-space) var(--page-gutter) var(--page-bottom-space);
+}
+
+/* Все основные блоки страниц имеют общую ось выравнивания. */
+.dashboard-page > *,
+.collection-page > *,
+.products-page > *,
+.profile-page > *,
+.profile-setup-page > * {
+  max-width: var(--page-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.collection-header,
+.products-page-header,
+.profile-page-header,
+.profile-overview,
+.profile-sections,
+.products-summary,
+.product-form-card,
+.products-toolbar,
+.products-categories,
+.products-grid,
+.products-empty,
+.collection-toolbar,
+.collection-grid,
+.recipe-grid,
+.diary-date-row,
+.diary-summary,
+.diary-meals,
+.diary-form-card,
+.diary-empty-note,
+.profile-setup-content,
+.profile-setup-footer {
+  width: 100%;
+  max-width: var(--page-content-max);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* На главной все секции, включая шапку и статистику, стоят на одной оси. */
+.dashboard-page > .dashboard-header,
+.dashboard-page > .dashboard-date,
+.dashboard-page > .nutrition-stats,
+.dashboard-page > .ai-chat-banner,
+.dashboard-page > .dashboard-overview {
+  width: 100%;
+}
+
+/* Список настроек выравнивается по той же оси, что и заголовок страницы.
+   При ширине контента более 1400px учитываем центрирование collection-header. */
+.collection-page > .settings-list {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: max(0px, calc((100% - var(--page-content-max)) / 2));
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page-gutter: 20px;
+    --page-top-space: 22px;
+    --page-bottom-space: 50px;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --page-gutter: 14px;
+    --page-top-space: 18px;
+    --page-bottom-space: 42px;
+  }
+}
