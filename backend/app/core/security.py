@@ -1,5 +1,6 @@
+import hashlib
+import uuid
 from datetime import datetime, timedelta, timezone
-from uuid import UUID
 
 import jwt
 from pwdlib import PasswordHash
@@ -18,13 +19,14 @@ def verify_password(
     plain_password: str,
     hashed_password: str,
 ) -> bool:
-    return password_hash.verify(
-        plain_password,
-        hashed_password,
-    )
+    return password_hash.verify(plain_password, hashed_password)
 
 
-def create_access_token(user_id: UUID) -> str:
+def hash_token(token: str) -> str:
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def create_access_token(user_id: uuid.UUID) -> str:
     now = datetime.now(timezone.utc)
 
     payload = {
@@ -43,23 +45,30 @@ def create_access_token(user_id: UUID) -> str:
     )
 
 
-def create_refresh_token(user_id: UUID) -> str:
+def create_refresh_token(
+    user_id: uuid.UUID,
+    jti: uuid.UUID,
+) -> tuple[str, datetime]:
     now = datetime.now(timezone.utc)
+    expires_at = now + timedelta(
+        days=settings.REFRESH_TOKEN_EXPIRE_DAYS
+    )
 
     payload = {
         "sub": str(user_id),
         "type": "refresh",
+        "jti": str(jti),
         "iat": now,
-        "exp": now + timedelta(
-            days=settings.REFRESH_TOKEN_EXPIRE_DAYS
-        ),
+        "exp": expires_at,
     }
 
-    return jwt.encode(
+    token = jwt.encode(
         payload,
         settings.JWT_SECRET_KEY,
         algorithm=settings.JWT_ALGORITHM,
     )
+
+    return token, expires_at
 
 
 def decode_token(token: str) -> dict:

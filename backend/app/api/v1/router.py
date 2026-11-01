@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 
+from app.api.v1.endpoints import auth
+
 
 api_router = APIRouter()
 
-# Здесь будут подключаться маршрутизаторы:
-# auth, users, nutrition, products, recipes и т.д.
+api_router.include_router(auth.router)

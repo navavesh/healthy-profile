@@ -9,6 +9,7 @@ from app.models.product import Product, UserProduct
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.chat import Chat, Message
 from app.models.meal import MealEntry
+from app.models.refresh_token import RefreshToken
 
 __all__ = [
     "User",
@@ -23,4 +24,5 @@ __all__ = [
     "Chat",
     "Message",
     "MealEntry",
+    "RefreshToken",
 ]
